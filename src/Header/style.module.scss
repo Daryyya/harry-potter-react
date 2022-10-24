@@ -1,9 +1,10 @@
 .header {
+    max-width: 688px;
+    margin: 0 auto;
     &__wrapper {
         max-width: 748px;
         margin: 0 auto;
         padding: 60px 0px;
-
     }
     &__title {
         font-weight: 700;

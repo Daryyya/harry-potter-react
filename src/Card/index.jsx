@@ -9,21 +9,10 @@ const Card = ({
   house,
   wand,
   alive,
-  setCh,
-  setLocalst,
-  localst,
-  ch
 }) => {
   return (
     <div className={style.card}>
       <label
-        onChange={(event) => {
-          setCh(event.target.checked);
-          if (ch) {
-            setLocalst([...localst, {key: actor}])
-          }
-          
-        }}
         className={style.check}
       >
         <input className={style.check__input} type="checkbox" />

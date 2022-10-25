@@ -1,16 +1,16 @@
 import React from "react";
 import style from "./style.module.scss";
 
-const Form = () => {
+const Form = ({setInputValue, setSelectValue}) => {
   return (
     <form className={style.form}>
       <label className={style.form__label}>
         Name
-        <input className={style.form__input} type="text" />
+        <input onChange={(event) => setInputValue(event.target.value.toLowerCase().trim())} className={style.form__input} type="text" />
       </label>
       <label className={style.form__label}>
         School
-        <select className={style.form__select}>
+        <select onChange={(event) => setSelectValue(event.target.value.toLowerCase().trim())} className={style.form__select}>
           <option checked value="">
             Choose house
           </option>

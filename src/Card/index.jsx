@@ -10,6 +10,9 @@ const Card = ({
   wand,
   alive,
 }) => {
+
+
+
   return (
     <div className={style.card}>
       <label

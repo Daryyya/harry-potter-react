@@ -12,6 +12,9 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
+  const [inputValue, setInputValue] = useState('');
+  const [selectValue, setSelectValue] = useState('');
+
   useEffect(() => {
     async function getData() {
       try {
@@ -28,17 +31,21 @@ function App() {
     getData()
   }, [])
 
+  
+  let filter = data.filter(({name}) => !inputValue || name.toLowerCase().trim().includes(inputValue)).filter(({house}) => !selectValue || house.toLowerCase().trim() === selectValue);
+  console.log(filter)
+
 
   return (
     <>
       <Header>
-        <Form />
+        <Form setInputValue={setInputValue} setSelectValue={setSelectValue}/>
       </Header>
       <Main>
         {isLoading && <Preloader />}
         {isError && <p>ERRRRROR</p>}
         
-        {data.map(({ actor, name, gender, house, wand, image, alive,  }, index) => (
+        {filter.map(({ actor, name, gender, house, wand, image, alive,  }, index) => (
           <Card 
           
             key={index}

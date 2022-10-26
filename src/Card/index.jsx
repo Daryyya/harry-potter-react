@@ -1,24 +1,19 @@
 import React from "react";
 import style from "./style.module.scss";
 
-const Card = ({
-  image,
-  actor,
-  name,
-  gender,
-  house,
-  wand,
-  alive,
-}) => {
-
-
+const Card = (props) => {
+  const { item, isLiked, like, dislike } = props;
+  const { image, actor, name, gender, house, wand, alive } = item;
 
   return (
     <div className={style.card}>
-      <label
-        className={style.check}
-      >
-        <input className={style.check__input} type="checkbox" />
+      <label  className={style.check}>
+        <input
+          checked={isLiked}
+          className={style.check__input}
+          type="checkbox"
+          onClick={() => (isLiked ? dislike(name) : like(name))}
+        />
         <span className={style.check__box}></span>
       </label>
       <div className={style.card__img}>

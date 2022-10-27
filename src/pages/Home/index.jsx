@@ -7,7 +7,9 @@ import Card from "../../Card";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-const Home = () => {
+const Home = (props) => {
+  const { liked, setLiked, like, dislike } = props;
+
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -31,15 +33,14 @@ const Home = () => {
     getData();
   }, []);
 
-  let filter = data
-    .filter(
-      ({ name }) =>
-        !inputValue || name.toLowerCase().trim().includes(inputValue)
-    )
-    .filter(
-      ({ house }) => !selectValue || house.toLowerCase().trim() === selectValue
-    );
-  console.log(filter);
+  let filteredList = data.filter(({ name, house }) => {
+    const isNameFit =
+      !inputValue || name.toLowerCase().includes(inputValue);
+    const isHouseFit =
+      !selectValue || house.toLowerCase().trim() === selectValue;
+
+    return isNameFit && isHouseFit;
+  });
   return (
     <>
       <Header>
@@ -52,20 +53,15 @@ const Home = () => {
         {isLoading && <Preloader />}
         {isError && <p>ERRRRROR</p>}
 
-        {filter.map(
-          ({ actor, name, gender, house, wand, image, alive }, index) => (
-            <Card
-              key={index}
-              image={image}
-              actor={actor}
-              name={name}
-              gender={gender}
-              house={house}
-              wand={wand.core}
-              alive={alive}
-            />
-          )
-        )}
+        {filteredList.map((item) => (
+          <Card
+            key={`${item.name}-${item.image}-${item.gender}`}
+            item={item}
+            isLiked={liked?.includes(item.name)}
+            like={like}
+            dislike={dislike}
+          />
+        ))}
       </Main>
     </>
   );

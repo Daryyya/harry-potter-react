@@ -12,7 +12,7 @@ const Card = (props) => {
           checked={isLiked}
           className={style.check__input}
           type="checkbox"
-          onClick={() => (isLiked ? dislike(name) : like(name))}
+          onChange={() => (isLiked ? dislike(name) : like(name))}
         />
         <span className={style.check__box}></span>
       </label>
